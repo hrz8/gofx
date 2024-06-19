@@ -23,6 +23,7 @@ func NewController(log *core.Logger, cfg *core.Config, svc port.OrderService) *c
 }
 
 func (ctrl *controller) CreateOrder(c echo.Context) error {
+	// time.Sleep(15 * time.Second)
 	if err := ctrl.svc.PersistOrderData(false); err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
