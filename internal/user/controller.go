@@ -1,6 +1,7 @@
 package user
 
 import (
+	"hrz8/gofx/config"
 	"hrz8/gofx/internal/core"
 	"hrz8/gofx/port"
 	"net/http"
@@ -10,11 +11,11 @@ import (
 
 type controller struct {
 	logger *core.Logger
-	config *core.Config
+	config *config.Config
 	svc    port.UserService
 }
 
-func NewController(log *core.Logger, cfg *core.Config, svc port.UserService) *controller {
+func NewController(log *core.Logger, cfg *config.Config, svc port.UserService) *controller {
 	return &controller{
 		logger: log,
 		config: cfg,

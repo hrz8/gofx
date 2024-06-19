@@ -3,16 +3,16 @@ package core
 import "go.uber.org/fx"
 
 type App struct {
-	Version   AppVersion
+	Config    *AppConfig
 	Modules   []fx.Option
 	Servers   []any
 	Providers []any
 	Invokers  []any
 }
 
-func NewApp(version string) *App {
+func NewApp(cfg *AppConfig) *App {
 	return &App{
-		Version: AppVersion(version),
+		Config: cfg,
 	}
 }
 
@@ -35,10 +35,10 @@ func (a *App) AddInvokers(invokers ...any) {
 func (a *App) Start() {
 	// default providers
 	opts := []fx.Option{
-		fx.Provide(func() AppVersion {
-			return a.Version
+		fx.Provide(func() *AppConfig {
+			return a.Config
 		}),
-		fx.Provide(NewConfig),
+		// fx.Provide(NewConfig),
 		fx.Provide(NewLogger),
 	}
 

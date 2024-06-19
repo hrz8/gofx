@@ -2,6 +2,7 @@ package order
 
 import (
 	"fmt"
+	"hrz8/gofx/config"
 	"hrz8/gofx/internal/core"
 	"hrz8/gofx/model"
 	"hrz8/gofx/port"
@@ -9,11 +10,11 @@ import (
 
 type service struct {
 	logger *core.Logger
-	config *core.Config
+	config *config.Config
 	uSvc   port.UserService
 }
 
-func NewService(log *core.Logger, cfg *core.Config, uSvc port.UserService) *service {
+func NewService(log *core.Logger, cfg *config.Config, uSvc port.UserService) *service {
 	return &service{
 		logger: log,
 		config: cfg,

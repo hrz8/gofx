@@ -65,7 +65,7 @@ func NewLogHandler(w io.Writer, opts *slog.HandlerOptions) *LogHandler {
 	}
 }
 
-func NewLogger(cfg *Config) *Logger {
+func NewLogger(cfg *AppConfig) *Logger {
 	var level slog.Level
 
 	switch cfg.LogLevel {
