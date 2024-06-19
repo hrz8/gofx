@@ -2,7 +2,7 @@ package order
 
 import (
 	"hrz8/gofx/config"
-	"hrz8/gofx/internal/core"
+	"hrz8/gofx/core"
 	"hrz8/gofx/port"
 	"net/http"
 
@@ -24,7 +24,6 @@ func NewController(log *core.Logger, cfg *config.Config, svc port.OrderService) 
 }
 
 func (ctrl *controller) CreateOrder(c echo.Context) error {
-	// time.Sleep(15 * time.Second)
 	if err := ctrl.svc.PersistOrderData(false); err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}

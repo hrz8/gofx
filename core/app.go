@@ -38,7 +38,6 @@ func (a *App) Start() {
 		fx.Provide(func() *AppConfig {
 			return a.Config
 		}),
-		// fx.Provide(NewConfig),
 		fx.Provide(NewLogger),
 	}
 

@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"hrz8/gofx/config"
-	"hrz8/gofx/internal/core"
+	"hrz8/gofx/core"
 	"hrz8/gofx/internal/order"
 	"hrz8/gofx/internal/user"
 	"net/http"
