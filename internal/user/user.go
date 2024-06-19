@@ -1,19 +1,12 @@
 package user
 
 import (
-	"fmt"
-	"hrz8/gofx/model"
+	"hrz8/gofx/port"
+
+	"go.uber.org/fx"
 )
 
-type userSvc struct{}
-
-func (s *userSvc) GetUser(name string) model.User {
-	return model.User{
-		Name: name + " ganteng",
-	}
-}
-
-func NewService() *userSvc {
-	fmt.Println("initialize user svc...")
-	return &userSvc{}
-}
+var Module = fx.Module("user", fx.Provide(
+	fx.Annotate(NewService, fx.As(new(port.UserService))),
+	fx.Annotate(NewController, fx.As(new(port.UserController))),
+))

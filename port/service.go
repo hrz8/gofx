@@ -1,13 +1,11 @@
 package port
 
-import (
-	"hrz8/gofx/model"
-)
-
-type UserService interface {
-	GetUser(name string) model.User
-}
+import "hrz8/gofx/model"
 
 type OrderService interface {
-	CreateOrder(username string) string
+	PersistOrderData(err bool) error
+}
+
+type UserService interface {
+	GetUserFromDB(err bool) (*model.User, error)
 }
