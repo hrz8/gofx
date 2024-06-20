@@ -1,21 +1,26 @@
 package main
 
 import (
-	"log"
-	"os"
+	"net/http"
 
-	"github.com/spf13/cobra"
+	"github.com/hrz8/gofx"
+	"github.com/hrz8/gofx/config"
+	"github.com/hrz8/gofx/internal/order"
+	"github.com/hrz8/gofx/internal/user"
 )
 
-var cmd = &cobra.Command{
-	Use: "gofx",
-}
-
 func main() {
-	cmd.AddCommand(AppCmd)
+	cfg := config.NewConfig()
 
-	if err := cmd.Execute(); err != nil {
-		log.Println(err)
-		os.Exit(1)
-	}
+	app := gofx.NewApp(&gofx.Config{
+		Version:  cfg.AppVersion,
+		Addr:     ":" + cfg.AppPort,
+		LogLevel: cfg.LogLevel,
+	})
+	app.AddModules(order.Module, user.Module)
+	app.AddProviders(RegisterRouters, config.NewConfig)
+	app.AddServers(gofx.NewHTTPServer)
+	app.AddInvokers(func(*http.Server) {})
+
+	app.Start()
 }
