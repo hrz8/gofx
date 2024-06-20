@@ -1,4 +1,4 @@
-package core
+package gofx
 
 import (
 	"context"
@@ -65,7 +65,7 @@ func NewLogHandler(w io.Writer, opts *slog.HandlerOptions) *LogHandler {
 	}
 }
 
-func NewLogger(cfg *AppConfig) *Logger {
+func NewLogger(cfg *Config) *Logger {
 	var level slog.Level
 
 	switch cfg.LogLevel {

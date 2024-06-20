@@ -1,6 +1,6 @@
-package core
+package gofx
 
-type AppConfig struct {
+type Config struct {
 	Version  string
 	Addr     string
 	LogLevel string

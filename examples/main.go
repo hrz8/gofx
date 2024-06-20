@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	CMD "hrz8/gofx/cmd"
+	CMD "github.com/hrz8/gofx/cmd"
 
 	"github.com/spf13/cobra"
 )

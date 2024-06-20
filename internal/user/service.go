@@ -2,17 +2,18 @@ package user
 
 import (
 	"fmt"
-	"hrz8/gofx/config"
-	"hrz8/gofx/core"
-	"hrz8/gofx/model"
+
+	"github.com/hrz8/gofx"
+	"github.com/hrz8/gofx/config"
+	"github.com/hrz8/gofx/model"
 )
 
 type service struct {
-	logger *core.Logger
+	logger *gofx.Logger
 	config *config.Config
 }
 
-func NewService(log *core.Logger, cfg *config.Config) *service {
+func NewService(log *gofx.Logger, cfg *config.Config) *service {
 	return &service{
 		logger: log,
 		config: cfg,

@@ -1,6 +1,11 @@
-package core
+package gofx
 
-import "github.com/labstack/echo/v4"
+import (
+	"context"
+	"net/http"
+
+	"github.com/labstack/echo/v4"
+)
 
 type Router struct {
 	Mux *echo.Echo
@@ -46,7 +51,33 @@ func (r *Router) Match(methods []string, path string, h echo.HandlerFunc, m ...e
 	return r.Mux.Match(methods, path, h, m...)
 }
 
+func setRequestContext(ctx context.Context, r *http.Request, key, val any) {
+	req := r.WithContext(context.WithValue(ctx, key, val))
+	*r = *req
+}
+
+func customContext(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		cc := &Context{c}
+		return next(cc)
+	}
+}
+
+func checkHtmx(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		ctx := c.Request().Context()
+		if c.Request().Header.Get("Hx-Request") == "true" {
+			setRequestContext(ctx, c.Request(), "hx-request", true)
+			c.Response().Header().Set("Cache-Control", "no-store, max-age=0")
+		}
+		return next(c)
+	}
+}
+
 func NewRouter() *Router {
 	e := echo.New()
+	e.Use(customContext)
+	e.Use(checkHtmx)
+
 	return &Router{Mux: e}
 }

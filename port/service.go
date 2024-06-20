@@ -1,6 +1,6 @@
 package port
 
-import "hrz8/gofx/model"
+import "github.com/hrz8/gofx/model"
 
 type OrderService interface {
 	PersistOrderData(err bool) error

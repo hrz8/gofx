@@ -1,21 +1,22 @@
 package user
 
 import (
-	"hrz8/gofx/config"
-	"hrz8/gofx/core"
-	"hrz8/gofx/port"
 	"net/http"
+
+	"github.com/hrz8/gofx"
+	"github.com/hrz8/gofx/config"
+	"github.com/hrz8/gofx/port"
 
 	"github.com/labstack/echo/v4"
 )
 
 type controller struct {
-	logger *core.Logger
+	logger *gofx.Logger
 	config *config.Config
 	svc    port.UserService
 }
 
-func NewController(log *core.Logger, cfg *config.Config, svc port.UserService) *controller {
+func NewController(log *gofx.Logger, cfg *config.Config, svc port.UserService) *controller {
 	return &controller{
 		logger: log,
 		config: cfg,

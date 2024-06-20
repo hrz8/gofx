@@ -1,7 +1,14 @@
-# just a demo
+# gofx
+
+## installation
+```bash
+go get github.com/hrz8/gofx
+```
+
+## run locally
 
 ```bash
 go mod download
 go mod tidy
-go run . serve
+go run examples/*.go serve
 ```
