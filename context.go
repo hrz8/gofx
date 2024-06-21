@@ -18,7 +18,7 @@ type Context struct {
 }
 
 func (c *Context) IsHtmx() bool {
-	return c.Request().Header.Get("Hx-Request") != "true"
+	return c.Request().Header.Get("Hx-Request") == "true"
 }
 
 func (c *Context) RenderView(code int, component Component) error {
