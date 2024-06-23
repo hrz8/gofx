@@ -22,6 +22,7 @@ func (c *Context) IsHtmx() bool {
 }
 
 func (c *Context) RenderView(code int, component Component) error {
+	c.Response().Header().Set("Content-Type", "text/html; charset=utf-8")
 	w := c.Response().Writer
 	w.WriteHeader(code)
 	return component.Render(c.Request().Context(), w)
